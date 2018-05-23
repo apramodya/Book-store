@@ -9,7 +9,17 @@ app.use(bodyParser.json());
 Genre = require('./models/genre');
 Book = require('./models/book');
 
-mongoose.connect('mongodb://localhost/bookstore');
+// map global promise
+mongoose.Promise = global.Promise;
+
+// connect to mongoDB using mlab
+mongoose.connect('mongodb://admin:admin@ds233320.mlab.com:33320/bookstore')
+    .then(() => console.log('MongoDB Connected'))
+    .catch((err) => console.log(err));
+
+// connect mongodb using local mongodb server
+//mongoose.connect('mongodb://localhost/bookstore');
+
 var db = mongoose.connection;
 
 app.get('/', function (req, res) {
