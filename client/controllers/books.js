@@ -14,4 +14,21 @@ myApp.controller('BooksController', ['$scope', '$http', '$location', '$routePara
             $scope.book = response.data;
         });
     }
+    $scope.addBook = function(){
+        $http.post('/api/book/', $scope.book).then(function(){
+            window.location.href = '#!/books';
+        });
+    }
+    $scope.editBook = function(){
+        var id = $routeParams.id;
+        $http.put('/api/book/'+id, $scope.book).then(function(){
+            window.location.href = '#!/books';
+        });
+    }
+    $scope.deleteBook = function(){
+        var id = $routeParams.id;
+        $http.delete('/api/book/'+id).then(function(){
+            window.location.href = '#!/books';
+        });
+    }
 }]);
